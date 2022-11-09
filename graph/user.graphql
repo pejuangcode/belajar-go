@@ -1,0 +1,29 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    products: [Product] @goField(forceResolver: true)
+}
+
+input NewUser {
+    name: String!
+    email: String!
+    password: String!
+}
+
+input UpdateUser {
+    name: String
+    email: String
+}
+
+type UserQuery {
+    user(id: ID!): User @goField(forceResolver: true)
+    users: [User]! @goField(forceResolver: true)
+}
+
+type UserOps {
+    create(input: NewUser!): User! @goField(forceResolver: true)
+    update(id: ID!, input: UpdateUser!): String! @goField(forceResolver: true)
+    delete(id: ID!): String! @goField(forceResolver: true)
+}

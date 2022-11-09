@@ -1,0 +1,32 @@
+type Product {
+    id: ID!
+    code: String!
+    description: String!
+    quantity: Int!
+    user_id: ID!
+}
+
+input NewProduct {
+    code: String!
+    description: String!
+    quantity: Int!
+    user_id: ID!
+}
+
+input UpdateProduct {
+    code: String
+    description: String
+    quantity: Int
+    user_id: ID!
+}
+
+type ProductQuery {
+    product(id: ID!): Product @goField(forceResolver: true)
+    products: [Product]! @goField(forceResolver: true)
+}
+
+type ProductMutation {
+    create(input: NewProduct!): Product! @goField(forceResolver: true)
+    update(id: ID!, input: UpdateProduct!): String! @goField(forceResolver: true)
+    delete(id: ID!): String! @goField(forceResolver: true)
+}
